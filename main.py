@@ -14,12 +14,19 @@ def sh(cmd, t=5):
         return f"ERR {e}"
 
 def imds(path, t=4):
+    import urllib.request
     try:
-        tok = sh("curl -s -m 2 -X PUT 'http://169.254.169.254/latest/api/token' -H 'X-aws-ec2-metadata-token-ttl-seconds: 60'")
-        hdr = f"-H 'X-aws-ec2-metadata-token: {tok}'" if tok else ""
-        return sh(f"curl -s -m {t} {hdr} 'http://169.254.169.254/latest/{path}'")
+        req = urllib.request.Request("http://169.254.169.254/latest/api/token", method="PUT",
+                                     headers={"X-aws-ec2-metadata-token-ttl-seconds": "60"})
+        try:
+            tok = urllib.request.urlopen(req, timeout=2).read().decode()
+        except Exception as e:
+            tok = ""
+        headers = {"X-aws-ec2-metadata-token": tok} if tok else {}
+        req = urllib.request.Request(f"http://169.254.169.254/latest/{path}", headers=headers)
+        return urllib.request.urlopen(req, timeout=t).read().decode()[:800]
     except Exception as e:
-        return f"ERR {e}"
+        return f"ERR {type(e).__name__}: {str(e)[:120]}"
 
 def tcp_probe(host, port, t=4):
     if host not in ALLOW_HOSTS or port not in ALLOW_PORTS:
