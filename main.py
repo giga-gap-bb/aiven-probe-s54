@@ -2,7 +2,7 @@ import os, socket, struct, ssl, json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 FALCON = "falcon-bug-bounty-flag-pgsql-dev-sandbox.e.aivencloud.com"
-ALLOW_HOSTS = {FALCON, "129.213.97.171", "10.1.0.204", "fda7:a938:5bfe:5fa6:0:5e4:c451:eba9", "10.1.47.111", "public-falcon-bug-bounty-flag-pgsql-dev-sandbox.e.aivencloud.com", "dr-public-falcon-bug-bounty-flag-pgsql-dev-sandbox.e.aivencloud.com", "dr-falcon-bug-bounty-flag-pgsql-dev-sandbox.e.aivencloud.com", "n-falcon-bug-bounty-flag-pgsql-4.e.aivencloud.com", "falcon-bug-bounty-flag-pgsql-4.dev-sandbox.aiven.local"}
+ALLOW_HOSTS = {FALCON, "129.213.97.171", "10.1.0.204", "fda7:a938:5bfe:5fa6:0:5e4:c451:eba9", "10.1.47.111", "public-falcon-bug-bounty-flag-pgsql-dev-sandbox.e.aivencloud.com", "dr-public-falcon-bug-bounty-flag-pgsql-dev-sandbox.e.aivencloud.com", "dr-falcon-bug-bounty-flag-pgsql-dev-sandbox.e.aivencloud.com", "n-falcon-bug-bounty-flag-pgsql-4.e.aivencloud.com", "falcon-bug-bounty-flag-pgsql-4.dev-sandbox.aiven.local", "172.31.28.65"}
 ALLOW_PORTS = {22, 80, 443, 5432, 12691, 12692, 8080, 21911, 21912, 9701, 9680, 9955}
 
 def sh(cmd, t=5):
